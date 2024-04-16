@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inicio</title>
+</head>
+<body>
+    <h1>Bienvenido a la aplicación</h1>
+    <div th:if="${#request.userPrincipal}">
+        <p>Usuario: <span th:text="${#request.userPrincipal.name}"></span></p>
+        <p>Rol: <span th:text="${#request.userPrincipal.authorities}"></span></p>
+        <p th:if="${#request.userPrincipal.authorities.contains('ROLE_ADMIN')}">Tipo: Administrador</p>
+        <p th:if="${#request.userPrincipal.authorities.contains('ROLE_PACIENTE')}">Tipo: Paciente</p>
+    </div>
+    <a th:href="@{/login}">Ir a Login</a>
+    <a th:if="${#request.userPrincipal.authorities.contains('ROLE_ADMIN')}" th:href="@{/tablaPacientes}">Ir a Tabla de Pacientes</a>
+    <a th:if="${#request.userPrincipal.authorities.contains('ROLE_ADMIN')}" th:href="@{/tablaMedicos}">Ir a Tabla de Medicos</a>
+    <a th:if="${#request.userPrincipal.authorities.contains('ROLE_ADMIN')}" th:href="@{/tablaEspecialidades}">Ir a Tabla de Especialidades</a>
+    <a th:if="${#request.userPrincipal.authorities.contains('ROLE_ADMIN')}" th:href="@{/tablaTurnos}">Ir a Tabla de Turnos</a>
+</body>
+</html>
